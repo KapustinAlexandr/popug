@@ -1,0 +1,15 @@
+version: '3.4'
+
+networks:
+  infrastructure:
+    name: async-arch_default
+    external: true
+
+services:
+  popug.task.api:
+    image: ${DOCKER_REGISTRY-}popugtaskapi
+    build:
+      context: .
+      dockerfile: Popug.Task.Api/Dockerfile
+    networks:
+        - infrastructure

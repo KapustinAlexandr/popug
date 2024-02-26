@@ -1,0 +1,9 @@
+version: '3.4'
+
+services:
+  popug.task.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "31000:8080"
