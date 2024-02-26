@@ -7,6 +7,7 @@
     <ProjectGuid>1cbb2c47-e2d6-45a2-a84b-75a3e4c6353e</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
+    <DockerComposeProjectName>kav-async-arch-apps</DockerComposeProjectName>
     <DockerServiceName>popug.task.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

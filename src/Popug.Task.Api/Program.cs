@@ -65,7 +65,8 @@ public static class ConfigExtensions
                 x.Audience = "popug-task-api";
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
-                    ValidateAudience = false
+                    ValidateAudience = false,
+                    NameClaimType = "preferred_username"
                 };
             });
 

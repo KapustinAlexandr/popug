@@ -1,3 +1,4 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +12,11 @@ public class TaskController : ControllerBase
     [HttpGet("whoami")]
     public IActionResult WhoAmI()
     {
-        return new OkObjectResult(User.Identity?.Name);
+        return new OkObjectResult(new
+        {
+            User.Identity?.Name,
+            Roles = User.Claims.Where(w=>w.Type == ClaimsIdentity.DefaultRoleClaimType).Select(w=>w.Value).ToList()
+        });
     }
 
     [Authorize(Roles = "admin")]
