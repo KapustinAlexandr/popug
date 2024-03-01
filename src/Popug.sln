@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popug.Task.Api", "Popug.Task.Api\Popug.Task.Api.csproj", "{8B3D382B-ED51-476C-8587-1C828D71C4CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popug.Tasks.Api", "Popug.Task.Api\Popug.Tasks.Api.csproj", "{8B3D382B-ED51-476C-8587-1C828D71C4CC}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1CBB2C47-E2D6-45A2-A84B-75A3E4C6353E}"
 EndProject

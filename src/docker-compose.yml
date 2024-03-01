@@ -6,7 +6,7 @@ networks:
     external: true
 
 services:
-  popug.task.api:
+  popug.tasks.api:
     image: ${DOCKER_REGISTRY-}popugtaskapi
     build:
       context: .

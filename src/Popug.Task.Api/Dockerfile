@@ -9,17 +9,17 @@ EXPOSE 8080
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Popug.Task.Api/Popug.Task.Api.csproj", "Popug.Task.Api/"]
-RUN dotnet restore "./Popug.Task.Api/Popug.Task.Api.csproj"
+COPY ["Popug.Task.Api/Popug.Tasks.Api.csproj", "Popug.Task.Api/"]
+RUN dotnet restore "./Popug.Task.Api/Popug.Tasks.Api.csproj"
 COPY . .
 WORKDIR "/src/Popug.Task.Api"
-RUN dotnet build "./Popug.Task.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+RUN dotnet build "./Popug.Tasks.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Popug.Task.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./Popug.Tasks.Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Popug.Task.Api.dll"]
+ENTRYPOINT ["dotnet", "Popug.Tasks.Api.dll"]

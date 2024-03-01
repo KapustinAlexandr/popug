@@ -1,10 +1,16 @@
 using System.Reflection;
+using LinqToDB;
+using LinqToDB.AspNet;
+using LinqToDB.AspNet.Logging;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Mxm.Kafka;
+using Popug.Tasks.Api.Data;
+using Popug.Tasks.Api.Logic;
 
-namespace Popug.Task.Api;
+namespace Popug.Tasks.Api;
 
 public class Program
 {
@@ -15,13 +21,27 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllers();
 
-        // Подключаем авторизацию
+        // РџРѕРґРєР»СЋС‡Р°РµРј Р°РІС‚РѕСЂРёР·Р°С†РёСЋ
         builder.Services.AddKeycloakAuthentication();
 
-        // Сваггер
+        // РЎРІР°РіРіРµСЂ
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerKeycloak();
-        
+
+        // DAL
+        builder.Services.AddLinqToDBContext<TasksDb>((provider, options) =>
+            options
+                .UsePostgreSQL("Host=localhost;Port=35432;Database=tasks;Username=keycloak;Password=keycloak;")
+                .UseDefaultLogging(provider));
+
+        // Logic
+        builder.Services.AddTransient<TaskLogic>();
+
+        // Kafka
+        builder.Services
+            .AddHostedService<KafkaConsumersStartupService>()
+            .AddKafkaProducer(builder.Configuration);
+
         var app = builder.Build();
         
         app.UseForwardedHeaders();
@@ -84,7 +104,7 @@ public static class ConfigExtensions
     {
         services.AddSwaggerGen(options =>
         {
-            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Popug Task API", Version = "v1" });
+            options.SwaggerDoc("v1", new OpenApiInfo { Title = "Popug Tasks API", Version = "v1" });
             options.AddSecurityDefinition("Keycloak", new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.OAuth2,

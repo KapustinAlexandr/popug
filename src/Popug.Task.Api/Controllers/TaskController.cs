@@ -1,8 +1,9 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
-namespace Popug.Task.Api.Controllers;
+namespace Popug.Tasks.Api.Controllers;
 
 [ApiController]
 [Route("[controller]")]

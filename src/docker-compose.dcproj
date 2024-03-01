@@ -8,7 +8,7 @@
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
     <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/swagger</DockerServiceUrl>
     <DockerComposeProjectName>kav-async-arch-apps</DockerComposeProjectName>
-    <DockerServiceName>popug.task.api</DockerServiceName>
+    <DockerServiceName>popug.tasks.api</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>
     <None Include="docker-compose.override.yml">
