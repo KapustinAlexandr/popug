@@ -31,7 +31,7 @@ public class Program
         // DAL
         builder.Services.AddLinqToDBContext<TasksDb>((provider, options) =>
             options
-                .UsePostgreSQL("Host=localhost;Port=35432;Database=tasks;Username=keycloak;Password=keycloak;")
+                .UsePostgreSQL("Host=db-auth;Port=5432;Database=tasks;Username=keycloak;Password=keycloak;")
                 .UseDefaultLogging(provider));
 
         // Logic
@@ -39,6 +39,8 @@ public class Program
 
         // Kafka
         builder.Services
+            .AddConsumer<AuthEventsConsumer>(builder.Configuration)
+            .AddConsumer<AuthAdminEventsConsumer>(builder.Configuration)
             .AddHostedService<KafkaConsumersStartupService>()
             .AddKafkaProducer(builder.Configuration);
 
