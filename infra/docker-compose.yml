@@ -88,8 +88,10 @@ services:
             KAFKA_CLUSTERS_0_NAME: popug
             KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:9092
             KAFKA_CLUSTERS_0_ZOOKEEPER: zookeeper:2181
+            KAFKA_CLUSTERS_0_SCHEMAREGISTRY: http://apicurio:8080/apis/ccompat/v6
         depends_on:
             - kafka
+            - apicurio
         ports:
             - "39090:8080"
 
@@ -98,3 +100,14 @@ services:
         restart: always
         ports:
             - 38081:8080
+
+    apicurio:
+        image: apicurio/apicurio-registry-sql:2.5.8.Final
+        ports:
+            - "38086:8080"
+        environment:
+            REGISTRY_DATASOURCE_URL: 'jdbc:postgresql://db-auth/schema_db'
+            REGISTRY_DATASOURCE_USERNAME: keycloak
+            REGISTRY_DATASOURCE_PASSWORD: keycloak
+        depends_on:
+            - db-auth
