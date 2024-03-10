@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Billing.Operation.Logged",
+  "type": "object",
+  "properties": {
+    "Type": {
+      "type": "string"
+    },
+    "OperationId": {
+      "type": "number"
+    },
+    "AccountId": {
+      "type": "number"
+    },
+    "PopugPublicId": {
+      "type": "string"
+    },
+    "Amount": {
+      "type": "number"
+    },
+    "OperationDate": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "Type",
+    "OperationId",
+    "AccountId",
+    "PopugPublicId",
+    "Amount",
+    "OperationDate"
+  ]
+}
