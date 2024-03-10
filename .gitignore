@@ -330,3 +330,4 @@ ASALocalRun/
 
 #Allow setup
 !/setup
+/src/Popug.Billing.Api/Properties/launchSettings.json

@@ -31,7 +31,8 @@ public class TaskLogic
 
     public PopugEntity GetRandom(List<PopugEntity> source)
     {
-        return source[System.Random.Shared.Next(0, source.Count - 1)];
+        var index = (int)(System.Random.Shared.NextDouble() * source.Count);
+        return source[index];
     }
     
     public async Task<TaskEntity> CreateTask(string userId, string description)
@@ -93,12 +94,8 @@ public class TaskLogic
     
     public async Task ShuffleTasks()
     {
-        var tasksQuery = _db.Tasks.Where(w => !w.IsDone).ToListAsync(); // Таски
-        var popugsQuery = GetPopugsValidForAssign().ToListAsync(); // Кэш попугов из БД.
-
-        await Task.WhenAll(tasksQuery, popugsQuery);
-
-        var tasks = tasksQuery.Result; var popugs = popugsQuery.Result;
+        var tasks = await _db.Tasks.Where(w => !w.IsDone).ToListAsync(); // Таски
+        var popugs = await GetPopugsValidForAssign().ToListAsync(); // Кэш попугов из БД.
 
         if (tasks.IsNullOrEmpty())
             return;

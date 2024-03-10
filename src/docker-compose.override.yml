@@ -7,3 +7,19 @@ services:
       - ASPNETCORE_HTTP_PORTS=8080
     ports:
       - "31000:8080"
+
+  popug.billing.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "32000:8080"
+
+        
+  popug.analytic.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+    ports:
+      - "33000:8080"
+

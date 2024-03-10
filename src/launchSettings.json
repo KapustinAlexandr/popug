@@ -4,7 +4,9 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "popug.tasks.api": "StartDebugging"
+        "popug.tasks.api": "StartDebugging",
+        "popug.billing.api": "StartDebugging",
+        "popug.analytic.api": "StartDebugging"
       }
     }
   }
