@@ -1,3 +1,5 @@
+create database schema_db; 
+
 create DATABASE tasks;
 -- 1fb5dac2-221e-4b26-88d1-ee8f62ffee0e -- userid
 
@@ -14,5 +16,6 @@ create table tasks(
     assign_to text not null,
     is_done boolean not null
 );
+
 
 

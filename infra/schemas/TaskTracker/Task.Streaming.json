@@ -1,0 +1,33 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TaskTracker.Task.Streaming",
+    "type": "object",
+    "properties": {
+      "Type": {
+        "type": "string"
+      },
+      "Data": {
+        "type": "object",
+        "properties": {
+          "TaskId": {
+            "type": "number"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "AssignTo": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "TaskId",
+          "Description",
+          "AssignTo"
+        ]
+      }
+    },
+    "required": [
+      "Type",
+      "Data"
+    ]
+  }

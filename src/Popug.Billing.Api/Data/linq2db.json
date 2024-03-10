@@ -1,0 +1,19 @@
+{
+    "general": {        
+        "overwrite": true,
+        "provider": "PostgreSQL",
+        "connection": "Host=localhost;Port=35432;Database=billing;Username=keycloak;Password=keycloak;"
+    },    
+    "dataModel": {                
+        "partial-entities": true,
+        "include-datatype": true,
+        "entity-class-name": {
+            "suffix": "Entity"
+        }
+    },
+    "code": {
+        "nrt": false,        
+        "single-file" : false,
+        "namespace": "Popug.Billing.Api.Data"
+    }
+}

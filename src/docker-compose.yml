@@ -13,3 +13,21 @@ services:
       dockerfile: Popug.Task.Api/Dockerfile
     networks:
         - infrastructure
+
+  popug.billing.api:
+    image: ${DOCKER_REGISTRY-}popugbillingapi
+    build:
+      context: .
+      dockerfile: Popug.Billing.Api/Dockerfile
+    networks:
+        - infrastructure
+
+
+  popug.analytic.api:
+    image: ${DOCKER_REGISTRY-}popuganalyticapi
+    build:
+      context: .
+      dockerfile: Popug.Analytic.Api/Dockerfile
+    networks:
+        - infrastructure
+

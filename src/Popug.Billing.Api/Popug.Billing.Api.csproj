@@ -6,18 +6,18 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
+	<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
-    <NoWarn>1701;1702;CS1591</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
+		<NoWarn>1701;1702;CS1591</NoWarn>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
-    <NoWarn>1701;1702;CS1591</NoWarn>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<WarningsAsErrors>$(WarningsAsErrors);NU1605</WarningsAsErrors>
+		<NoWarn>1701;1702;CS1591</NoWarn>
+	</PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Confluent.SchemaRegistry" Version="2.3.0" />

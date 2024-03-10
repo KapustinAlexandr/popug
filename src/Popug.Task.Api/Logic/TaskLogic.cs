@@ -31,7 +31,8 @@ public class TaskLogic
 
     public PopugEntity GetRandom(List<PopugEntity> source)
     {
-        return source[System.Random.Shared.Next(0, source.Count - 1)];
+        var index = (int)(System.Random.Shared.NextDouble() * source.Count);
+        return source[index];
     }
     
     public async Task<TaskEntity> CreateTask(string userId, string description)
@@ -57,9 +58,12 @@ public class TaskLogic
         });
 
         var newTask = await _db.Tasks.SingleAsync(w => w.TaskId == newTaskId);
-
-        await _producer.SendMessage("Task.CUD", newTask.CUDCreated(), newTask.TaskId.ToString());
-        await _producer.SendMessage("TaskTracker.PopugAssignedToTask", newTask, newTask.TaskId.ToString());
+        
+        await _producer.SendEvent(
+            KafkaTopic.TaskTracker.TaskStreaming, 
+            new { newTask.TaskId, newTask.Description, newTask.AssignTo }.CUDCreated(), 
+            version: 1, 
+            key: newTask.TaskId);
 
         tran.Complete();
 
@@ -82,21 +86,16 @@ public class TaskLogic
 
             var task = await _db.Tasks.SingleAsync(w => w.TaskId == taskId);
 
-            await _producer.SendMessage("Task.CUD", task.CUDUpdated(), task.TaskId.ToString());
-            await _producer.SendMessage("TaskTracker.TaskCompleted", task, task.TaskId.ToString());
-
+            await _producer.SendEvent(KafkaTopic.TaskTracker.TaskCompleted, new { task.TaskId, task.AssignTo }, version: 1, key: task.TaskId);
+            
             tran.Complete();
         }
     }
     
     public async Task ShuffleTasks()
     {
-        var tasksQuery = _db.Tasks.Where(w => !w.IsDone).ToListAsync(); // Таски
-        var popugsQuery = GetPopugsValidForAssign().ToListAsync(); // Кэш попугов из БД.
-
-        await Task.WhenAll(tasksQuery, popugsQuery);
-
-        var tasks = tasksQuery.Result; var popugs = popugsQuery.Result;
+        var tasks = await _db.Tasks.Where(w => !w.IsDone).ToListAsync(); // Таски
+        var popugs = await GetPopugsValidForAssign().ToListAsync(); // Кэш попугов из БД.
 
         if (tasks.IsNullOrEmpty())
             return;
@@ -113,10 +112,8 @@ public class TaskLogic
                     .Where(w => w.TaskId == task.TaskId)
                     .Set(s => s.AssignTo, () => GetRandom(popugs).UserId)
                     .UpdateAsync();
-
-
-                await _producer.SendMessage("Task.CUD", task.CUDUpdated(), task.TaskId.ToString());
-                await _producer.SendMessage("TaskTracker.PopugAssignedToTask", task, task.TaskId.ToString());
+                
+                await _producer.SendEvent(KafkaTopic.TaskTracker.TaskAssigned, new { task.TaskId, task.AssignTo }, version: 1, key: task.TaskId);
 
                 tran.Complete();
             }

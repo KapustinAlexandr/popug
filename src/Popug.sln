@@ -7,6 +7,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Popug.Tasks.Api", "Popug.Ta
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{1CBB2C47-E2D6-45A2-A84B-75A3E4C6353E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Popug.Billing.Api", "Popug.Billing.Api\Popug.Billing.Api.csproj", "{88668685-D044-46C5-AAFC-B740A8B83D2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Popug.Analytic.Api", "Popug.Analytic.Api\Popug.Analytic.Api.csproj", "{35D812A9-244B-4C9B-8065-D34C31B176D0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{1CBB2C47-E2D6-45A2-A84B-75A3E4C6353E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CBB2C47-E2D6-45A2-A84B-75A3E4C6353E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CBB2C47-E2D6-45A2-A84B-75A3E4C6353E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88668685-D044-46C5-AAFC-B740A8B83D2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88668685-D044-46C5-AAFC-B740A8B83D2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88668685-D044-46C5-AAFC-B740A8B83D2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88668685-D044-46C5-AAFC-B740A8B83D2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35D812A9-244B-4C9B-8065-D34C31B176D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35D812A9-244B-4C9B-8065-D34C31B176D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35D812A9-244B-4C9B-8065-D34C31B176D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35D812A9-244B-4C9B-8065-D34C31B176D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
