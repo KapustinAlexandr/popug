@@ -50,6 +50,8 @@ services:
             POSTGRES_PASSWORD: keycloak
             POSTGRES_DB: keycloak
             PGDATA: /var/lib/postgresql/data/pgdata
+        ports:
+            - 35432:5432
         volumes:
             - pg_auth_data:/var/lib/postgresql/data:rw
 
